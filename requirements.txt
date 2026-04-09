@@ -1,0 +1,16 @@
+pandas
+numpy
+scikit-learn
+xgboost
+tensorflow
+streamlit
+beautifulsoup4
+tldextract
+tqdm
+torch
+seaborn
+matplotlib
+shap
+python-whois 
+tldextract 
+requests
