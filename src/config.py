@@ -3,3 +3,4 @@
 DATA_PATH = "data/kaggle/balanced_urls.csv"
 MODEL_DIR = "models"
 MAXLEN = 100 # for RNN
+USE_REAL_INFRA = False   # 🔴 For demo (fast & safe)

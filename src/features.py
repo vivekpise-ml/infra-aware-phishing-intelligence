@@ -14,6 +14,13 @@ from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 import tldextract
 
+from src.config import USE_REAL_INFRA
+
+if USE_REAL_INFRA:
+    from src.infrastructure.infra_utils import get_infra_features
+else:
+    from src.infrastructure.infra_features import get_infra_features
+
 # -------------------------------------------------------------------
 # Known URL shorteners
 # -------------------------------------------------------------------

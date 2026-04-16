@@ -156,3 +156,10 @@ This system performs phishing detection using:
 
 Designed for research and real-world cybersecurity applications.
 """)
+
+st.subheader("🚀 Upcoming Enhancements")
+st.write("""
+- Infrastructure intelligence (WHOIS, ASN)
+- Drift detection (time-based model updates)
+- Campaign-level clustering
+""")

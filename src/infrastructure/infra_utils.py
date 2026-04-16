@@ -3,6 +3,22 @@ import whois
 import tldextract
 import requests
 from datetime import datetime
+import json
+import os
+
+CACHE_PATH = "data/cache/infra_cache.json"
+
+
+def load_cache():
+    if not os.path.exists(CACHE_PATH):
+        return {}
+    with open(CACHE_PATH, "r") as f:
+        return json.load(f)
+
+
+def save_cache(cache):
+    with open(CACHE_PATH, "w") as f:
+        json.dump(cache, f, indent=2)
 
 
 def extract_domain(url):
@@ -54,3 +70,30 @@ def get_asn_info(ip):
 
     except:
         return None, None
+    
+    
+def get_infra_features(domain):
+
+    cache = load_cache()
+
+    # ✅ If already cached
+    if domain in cache:
+        return cache[domain]
+
+    # ❌ Otherwise fetch
+    ip = get_ip(domain)
+    age, registrar = get_whois_info(domain)
+    asn, country = get_asn_info(ip)
+
+    result = {
+        "domain_age_days": age if age else 0,
+        "has_registrar": int(registrar is not None),
+        "has_asn": int(asn is not None),
+        "is_foreign_hosting": int(country not in ["India", "US"] if country else 0)
+    }
+
+    # 💾 Save to cache
+    cache[domain] = result
+    save_cache(cache)
+
+    return result    
