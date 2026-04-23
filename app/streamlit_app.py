@@ -150,8 +150,8 @@ This system performs phishing detection using:
 
 - ✅ XGBoost (primary model)
 - ✅ Multimodal feature extraction (URL + HTML)
-- ✅ Infrastructure intelligence (ASN, WHOIS, etc.)
-- ✅ Drift monitoring
+- ⚙️ Infrastructure intelligence (ASN, WHOIS) *(in progress)*  
+- ⚙️ Drift monitoring *(structural implementation)*
 - ✅ SHAP-based explainability
 
 Designed for research and real-world cybersecurity applications.
@@ -159,7 +159,8 @@ Designed for research and real-world cybersecurity applications.
 
 st.subheader("🚀 Upcoming Enhancements")
 st.write("""
-- Infrastructure intelligence (WHOIS, ASN)
-- Drift detection (time-based model updates)
-- Campaign-level clustering
+- 🔧 Infrastructure intelligence (WHOIS, ASN integration)  
+- 🔧 Drift detection (time-based modeling)  
+- 🔧 Campaign-level clustering  
+- 🔧 Intelligence-driven reporting 
 """)

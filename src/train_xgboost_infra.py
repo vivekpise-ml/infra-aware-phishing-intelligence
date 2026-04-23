@@ -7,19 +7,17 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 from xgboost import XGBClassifier
 
-from src.features import extract_all_features
+from src.features_with_infra import extract_all_features
 from src.config import DATA_PATH, MODEL_DIR
 
 
-def train_xgboost_only():
+def train_xgboost_infra():
 
     df = pd.read_csv(DATA_PATH)
 
-    
     # for infra feature
     # 🔥 ADD THIS RIGHT AFTER LOADING
     df = df.sample(3000, random_state=42)
-    
 
     # detect label
     label_col = "label" if "label" in df.columns else "type"
@@ -38,7 +36,7 @@ def train_xgboost_only():
 
     # save feature names
     os.makedirs(MODEL_DIR, exist_ok=True)
-    joblib.dump(list(X.columns), f"{MODEL_DIR}/classical_feature_names.pkl")
+    joblib.dump(list(X.columns), f"{MODEL_DIR}/xgb_infra_feature_names.pkl")
 
     # split
     X_train, X_test, y_train, y_test = train_test_split(
@@ -50,7 +48,7 @@ def train_xgboost_only():
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
 
-    joblib.dump(scaler, f"{MODEL_DIR}/classical_scaler.pkl")
+    joblib.dump(scaler, f"{MODEL_DIR}/xgb_infra_scaler.pkl")
 
     # model
     model = XGBClassifier(
@@ -68,9 +66,9 @@ def train_xgboost_only():
 
     print(f"✅ XGBoost Accuracy: {acc:.4f}")
 
-    joblib.dump(model, f"{MODEL_DIR}/xgboost_model.pkl")
+    joblib.dump(model, f"{MODEL_DIR}/xgboost_infra_model.pkl")
     print("💾 Saved XGBoost model")
 
 
 if __name__ == "__main__":
-    train_xgboost_only()
+    train_xgboost_infra()

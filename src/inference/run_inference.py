@@ -25,6 +25,8 @@ def run(url):
     # Step 3: Infra intelligence (uses domain, NOT full URL)
     infra = get_infra_features(domain)
 
+    print("INFRA:", infra)
+
     # Step 4: Drift
     drift = compute_drift_score(pred["features"], None)
 

@@ -14,8 +14,13 @@ from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 import tldextract
 
+from urllib.parse import urlparse
 from src.config import USE_REAL_INFRA
 
+if USE_REAL_INFRA:
+    from src.infrastructure.infra_features import get_infra_features
+else:
+    from src.infrastructure.infra_dummy import get_infra_features
 
 # -------------------------------------------------------------------
 # Known URL shorteners
@@ -210,6 +215,14 @@ def extract_all_features(url: str, html: str = None) -> dict:
             "num_links": 0,
             "has_event_handlers": 0,
         })
+
+    
+    parsed = urlparse(url)
+    domain = parsed.netloc
+
+    infra = get_infra_features(domain)
+
+    features.update(infra)
 
     return features
 

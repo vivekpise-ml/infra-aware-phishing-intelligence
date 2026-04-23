@@ -71,7 +71,7 @@ def get_asn_info(ip):
     except:
         return None, None
     
-    
+'''   
 def get_infra_features(domain):
 
     cache = load_cache()
@@ -97,3 +97,4 @@ def get_infra_features(domain):
     save_cache(cache)
 
     return result    
+'''
